@@ -1,0 +1,5 @@
+hey this is the file i created for solving question 3 
+and it tells how to use createWriteStream method using fs
+now mayank gupta signing off!
+
+bye bye 
