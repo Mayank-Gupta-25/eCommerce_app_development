@@ -6,7 +6,6 @@ export const addProduct = async(req , res)=>{
         const createProd = await Product.create({
             name : pro.name,
             price : pro.price,
-            productId : pro.productId,
             category : pro.category,
             quantity : pro.quantity,
             unit : pro.unit,
@@ -27,7 +26,7 @@ export const getProduct = async(req , res)=>{
     try{
         const pro = req.params.id ; 
         const findProduct = await Product.findById({
-            productId : pro
+            _id : pro
         });
         if(!findProduct){
             return res.status(401).json({
@@ -35,7 +34,7 @@ export const getProduct = async(req , res)=>{
             })
         }
         res.status(200).json({
-            message: "You successfully added product !! ",
+            message: "Here is/are the products you demanded !! ",
             data : findProduct
         })
     }
@@ -49,28 +48,33 @@ export const getProduct = async(req , res)=>{
 export const updateProduct = async(req , res)=>{
     try{
         const update = req.body ;
+        console.log(update);
         const pro = req.params.id ;
-        const findProduct = await Product.findById({
-            productId : pro
+        const findProduct = await Product.findByIdAndUpdate({
+            _id : pro
+        },{
+            $set:{
+                name :  update.name ,
+                price : update.price ,
+                category : update.category,
+                quantity : update.quantity,
+                unit : update.unit,
+                imageURL : update.imageURL,
+                discount : update.discount,
+                description : update.description , 
+                isActive : update.isActive,
+            }
         });
         if(!findProduct){
             return res.status(401).json({
                 message : "No product found!!"
             })
         }
-        findProduct.name =  update.name ;
-        findProduct.price = update.price ;
-        findProduct.category = update.category;
-        findProduct.quantity = update.quantity;
-        findProduct.unit = update.unit;
-        findProduct.imageURL = update.imageURL;
-        findProduct.discount = update.discount;
-        findProduct.description = update.description ; 
-        findProduct.isActive = update.isActive;
-        
+        console.log(findProduct.category);
+        console.log(update.category);
         
         res.status(200).json({
-            message: "You successfully added product !! "
+            message: "You successfully updated product !! "
         })
     }
     catch(err){
@@ -84,7 +88,7 @@ export const deleteProduct = async(req , res)=>{
     try{
         const pro = req.params.id ; 
         const findProduct = await Product.findByIdAndDelete({
-            productId : pro
+            _id : pro
         });
         if(!findProduct){
             return res.status(401).json({

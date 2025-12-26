@@ -6,10 +6,6 @@ const productSchema = new mongoose.Schema({
         required : true,
         trim : true
     },
-    productId:{
-        type : Number,
-        required : true
-    },
     price:{
         type: Number,
         required : true,
