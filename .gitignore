@@ -3,3 +3,7 @@ config.env
 .env
 .DS_Store
 npm-debug.log
+outputfile.txt
+functions.js
+question.js
+sample_text.txt
