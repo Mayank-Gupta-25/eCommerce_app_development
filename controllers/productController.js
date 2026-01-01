@@ -1,5 +1,25 @@
 import Product from "../models/productModel.js"
 
+export const getAllProduct = async(req , res)=>{
+    try{
+        const findProduct = await Product.find();
+        if(!findProduct){
+            return res.status(401).json({
+                message : "No product find !!"
+            })
+        }
+        res.status(200).json({
+            message: "Here is/are the products you demanded !! ",
+            data : findProduct
+        })
+    }
+    catch(err){
+        res.status(500).json({
+            err : "Internal server error",
+            message : err.message
+        })
+    }
+}
 export const addProduct = async(req , res)=>{
     try{
         const pro = req.body ; 
