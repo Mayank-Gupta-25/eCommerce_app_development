@@ -11,6 +11,11 @@ const productSchema = new mongoose.Schema({
         required : true,
         min : 0
     },
+    isVeg:{
+        type: Boolean,
+        required: true,
+        default : true
+    },
     discount :{
         type : Number,
         default: 0,
